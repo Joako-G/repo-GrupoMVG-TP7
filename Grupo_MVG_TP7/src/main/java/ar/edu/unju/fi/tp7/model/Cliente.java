@@ -6,13 +6,17 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -54,13 +58,20 @@ public class Cliente {
 	@Column(name = "cli_fechaUltimaCompra")
 	private LocalDate fechaUltimaCompra;
 	
+	@Autowired
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cuen_id")
+	private Cuenta cuenta;
+	
 	public Cliente() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cliente(String tipoDocumento, int nroDocumento, String nombreApellido, String email, String password,
-			LocalDate fechaNacimiento, int edad, int codigoAreaTelefono, int nroTelefono, LocalDate fechaUltimaCompra) {
+	public Cliente(Long id, String tipoDocumento, int nroDocumento, String nombreApellido, String email,
+			String password, LocalDate fechaNacimiento, int codigoAreaTelefono, int nroTelefono,
+			LocalDate fechaUltimaCompra, Cuenta cuenta) {
 		super();
+		this.id = id;
 		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDocumento;
 		this.nombreApellido = nombreApellido;
@@ -70,6 +81,7 @@ public class Cliente {
 		this.codigoAreaTelefono = codigoAreaTelefono;
 		this.nroTelefono = nroTelefono;
 		this.fechaUltimaCompra = fechaUltimaCompra;
+		this.cuenta = cuenta;
 	}
 
 	public Long getId() {
@@ -190,13 +202,21 @@ public class Cliente {
 		return tiempo;
 	}
 
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
 	@Override
 	public String toString() {
-		return "Cliente [tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento + ", nombreApellido="
-				+ nombreApellido + ", email=" + email + ", password=" + password + ", fechaNacimiento="
-				+ fechaNacimiento + ", codigoAreaTelefono=" + codigoAreaTelefono + ", nroTelefono=" + nroTelefono
-				+ ", fechaUltimaCompra=" + fechaUltimaCompra + ", getEdad()=" + getEdad()
-				+ ", getTiempoDesdeUltimaCompra()=" + getTiempoDesdeUltimaCompra()
+		return "Cliente [id=" + id + ", tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento
+				+ ", nombreApellido=" + nombreApellido + ", email=" + email + ", password=" + password
+				+ ", fechaNacimiento=" + fechaNacimiento + ", codigoAreaTelefono=" + codigoAreaTelefono
+				+ ", nroTelefono=" + nroTelefono + ", fechaUltimaCompra=" + fechaUltimaCompra + ", cuenta=" + cuenta
+				+ ", getEdad()=" + getEdad() + ", getTiempoDesdeUltimaCompra()=" + getTiempoDesdeUltimaCompra()
 				+ ", getTiempoDesdeFechaNacimiento()=" + getTiempoDesdeFechaNacimiento()
 				+ ", getTiempoHastaCumpleanios()=" + getTiempoHastaCumpleanios() + "]";
 	}
