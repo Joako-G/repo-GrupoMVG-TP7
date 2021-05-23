@@ -11,6 +11,9 @@ import ar.edu.unju.fi.tp7.service.IProductoService;
 
 @Service("productoServiceMysql")
 public class ProductoServiceMysqlImp implements IProductoService{
+	
+	@Autowired
+	private Producto producto;
 
 	@Autowired
 	private IProductoRepository productoRepository;
