@@ -17,6 +17,7 @@
 				<div class="col-md-10">
 					<h1>Alta de un nuevo producto</h1>
 					<form th:action="@{/producto/guardar}" th:object="${producto}" method="POST">
+ 						<input type="hidden" th:field="*{id}"/> 
 						<div class="form-group row">
 							<label for="codigo" class="col-md-4 col-form-label">Código del producto</label>
 							<div class="col-md-8">

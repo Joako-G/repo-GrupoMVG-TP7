@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tp7.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,6 @@ import ar.edu.unju.fi.tp7.service.IProductoService;
 @Service("productoServiceMysql")
 public class ProductoServiceMysqlImp implements IProductoService{
 	
-	@Autowired
-	private Producto producto;
-
 	@Autowired
 	private IProductoRepository productoRepository;
 	
@@ -46,6 +44,17 @@ public class ProductoServiceMysqlImp implements IProductoService{
 	public Producto getProductoPorCodigo(int codigo) {
 		Producto producto = productoRepository.findByCodigo(codigo);
 		return producto;
+	}
+
+	@Override
+	public Optional<Producto> getProductoPorId(Long id) {
+		Optional<Producto> producto = productoRepository.findById(id);
+		return producto;
+	}
+
+	@Override
+	public void eliminarProducto(Long id) {
+		productoRepository.deleteById(id);
 	}
 
 }
