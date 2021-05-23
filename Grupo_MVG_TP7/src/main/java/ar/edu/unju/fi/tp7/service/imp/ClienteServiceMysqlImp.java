@@ -3,11 +3,13 @@ package ar.edu.unju.fi.tp7.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tp7.model.Cliente;
 import ar.edu.unju.fi.tp7.repository.IClienteRepository;
 import ar.edu.unju.fi.tp7.service.IClienteService;
 
+@Service("clienteServiceMysql")
 public class ClienteServiceMysqlImp implements IClienteService {
 
 	@Autowired
