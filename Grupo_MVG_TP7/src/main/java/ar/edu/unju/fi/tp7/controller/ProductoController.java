@@ -19,7 +19,7 @@ public class ProductoController {
 	private Producto producto;
 	
 	@Autowired
-	@Qualifier("productoUtilService")
+	@Qualifier("productoServiceMysql")
 	private IProductoService productoService;
 	
 	@GetMapping("/producto/nuevo")
