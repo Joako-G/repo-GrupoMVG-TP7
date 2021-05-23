@@ -2,6 +2,7 @@ package ar.edu.unju.fi.tp7.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -56,6 +57,18 @@ public class ProductoServiceImp implements IProductoService{
 			}
 		}
 		return prod;
+	}
+
+	@Override
+	public Optional<Producto> getProductoPorId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void eliminarProducto(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

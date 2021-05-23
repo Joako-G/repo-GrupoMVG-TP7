@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tp7.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import ar.edu.unju.fi.tp7.model.Producto;
 
@@ -12,4 +13,6 @@ public interface IProductoService {
 	public Producto consultarUltimo();
 
 	public Producto getProductoPorCodigo(int codigo);
+	public Optional<Producto> getProductoPorId(Long id);
+	public void eliminarProducto(Long id);
 }
