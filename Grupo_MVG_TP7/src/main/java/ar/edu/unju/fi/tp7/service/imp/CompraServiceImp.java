@@ -2,6 +2,7 @@ package ar.edu.unju.fi.tp7.service.imp;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,4 +46,16 @@ public class CompraServiceImp implements ICompraService {
 		return ultimo;
 	}
 
+	@Override
+	public void eliminarCompra(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Optional<Compra> getCompraPorId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
