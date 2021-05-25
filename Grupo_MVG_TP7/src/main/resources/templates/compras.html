@@ -28,6 +28,7 @@
 									<th scope="col">Nombre del producto</th>
 									<th scope="col">Cantidad</th>
 									<th scope="col">Total</th>
+									<th scope="col">Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -36,6 +37,10 @@
 									<td th:text="${comp.producto.nombre}"></td>
 									<td th:text="${comp.cantidad}"></td>
 									<td th:text="'$' + ${comp.total}"></td>
+									<td>
+										<a th:href="@{/compra/editar/}+${comp.id}" class="btn btn-warning">Editar</a>
+										<a th:href="@{/compra/eliminar/}+${comp.id}" class="btn btn-danger">Eliminar</a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
