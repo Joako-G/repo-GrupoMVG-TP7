@@ -13,6 +13,9 @@ import ar.edu.unju.fi.tp7.service.ICuentaService;
 public class CuentaServiceMysqlImp implements ICuentaService {
 	
 	@Autowired
+	private Cuenta cuenta;
+	
+	@Autowired
 	private ICuentaRepository cuentaRepository;
 	
 	@Override
@@ -21,9 +24,14 @@ public class CuentaServiceMysqlImp implements ICuentaService {
 	}
 
 	@Override
-	public List<Cuenta> getCuenta() {
+	public List<Cuenta> getCuentas() {
 		List <Cuenta> cuentas = (List<Cuenta>) cuentaRepository.findAll();
 		return cuentas;
+	}
+
+	@Override
+	public Cuenta getCuenta() {
+		return cuenta;
 	}
 
 }

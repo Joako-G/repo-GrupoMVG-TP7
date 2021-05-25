@@ -54,6 +54,15 @@
 						      </div>
 						    </div>
 						</fieldset>
+						
+						<div class="col-md-6 mb-3">
+					      <label for="cliente">Seleccionar Cliente</label>
+					      <select th:field="*{cliente.id}" id="cliente" class="form-control">
+							  <option th:each="cu : ${clientes}" 
+							  th:value="${cu.nroDocumento}" 
+							  th:text="${cu.nombreApellido}"></option>
+							</select>
+					    </div>
 					  	
 					  	<div class="form-group row">
 					    	<div class="col-md-8">
