@@ -43,8 +43,8 @@ public class ClienteServiceMysqlImp implements IClienteService {
 
 	@Override
 	public Cliente getClientePorDni(int nroDocumento) {
-		Cliente cliente = clienteRepository.findByDocumento(nroDocumento);
-		return cliente;
+	//	Cliente cliente = clienteRepository.findByDni(nroDocumento);
+		return null;
 	}
 
 	@Override
