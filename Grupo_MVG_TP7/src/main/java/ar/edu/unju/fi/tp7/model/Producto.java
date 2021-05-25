@@ -1,16 +1,13 @@
 package ar.edu.unju.fi.tp7.model;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +18,7 @@ import org.springframework.stereotype.Component;
 public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "prod_id")
 	private Long id;
 	
 	@Column(name="prod_codigo", nullable = false)
@@ -38,8 +36,9 @@ public class Producto {
 	@Column(name="prod_stock")
 	private int stock;
 	
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-	private List<Compra> compras = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "com_id")
+	private Compra compra;
 	
 	public Producto() {
 		// TODO Auto-generated constructor stub
