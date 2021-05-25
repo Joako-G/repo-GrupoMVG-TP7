@@ -5,5 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import ar.edu.unju.fi.tp7.model.Cliente;
 
 public interface IClienteRepository extends CrudRepository<Cliente, Long>{
-
+	
+	public Cliente findByDocumento(int nroDocumento);
+	
 }
