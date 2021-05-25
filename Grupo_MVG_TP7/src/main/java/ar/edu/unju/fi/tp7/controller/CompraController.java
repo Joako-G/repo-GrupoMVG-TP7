@@ -1,12 +1,15 @@
 package ar.edu.unju.fi.tp7.controller;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,11 +24,13 @@ public class CompraController {
 	
 	@Autowired
 	private Compra compra;
+	
 	@Autowired
-	@Qualifier("compraUtilService")
+	@Qualifier("compraServiceMysql")
 	private ICompraService compraService;
+	
 	@Autowired
-	@Qualifier("productoUtilService")
+	@Qualifier("productoServiceMysql")
 	private IProductoService productoService;
 	
 	@GetMapping("/compra/nueva")
@@ -49,8 +54,6 @@ public class CompraController {
 	@GetMapping("/compra/listado")
 	public ModelAndView getListadoCompraPage() {
 		ModelAndView model = new ModelAndView("compras");
-		if(compraService.getCompras() == null)
-			compraService.generarTablaCompras();
 		model.addObject("compras", compraService.getCompras());
 		return model;
 	}
@@ -59,5 +62,21 @@ public class CompraController {
 	public String getCompraUltimoPage(Model model) {
 		model.addAttribute(compraService.consultarUltimaCompra());
 		return "ultimacompra";
+	}
+	
+	@GetMapping("/compra/editar/{id}")
+	public ModelAndView modificarCompraPage(@PathVariable (value = "id")Long id) {
+		ModelAndView model = new ModelAndView("compranueva");
+		Optional<Compra> compra = compraService.getCompraPorId(id);
+		model.addObject("compra", compra);
+		model.addObject("productos", productoService.getProductos());
+		return model;
+	}
+	
+	@GetMapping("/compra/eliminar/{id}")
+	public ModelAndView eliminarCompraPage(@PathVariable(value = "id")Long id) {
+		ModelAndView model = new ModelAndView("redirect:/compra/listado");
+		compraService.eliminarCompra(id);
+		return model;
 	}
 }

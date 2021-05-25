@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tp7.model.Compra;
 import ar.edu.unju.fi.tp7.repository.ICompraRepository;
 import ar.edu.unju.fi.tp7.service.ICompraService;
 
+@Service("compraServiceMysql")
 public class CompraServiceMysqlImp implements ICompraService {
 	
 	@Autowired

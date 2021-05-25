@@ -1,5 +1,8 @@
 package ar.edu.unju.fi.tp7.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +24,10 @@ public class Compra {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "com_codigo")
-	private Long codigo;
+	private Long id;
+	
+	@Column(name = "com_codigo", nullable = false)
+	private int codigo;
 	
 	@Column(name = "com_cantidad")
 	private int cantidad;
@@ -29,16 +35,19 @@ public class Compra {
 	@Column(name = "com_total")
 	private double total;
 	
+	@OneToMany(mappedBy = "compra")
+	private List<Producto> productos = new ArrayList<Producto>();
+	
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pro_codigo")
+	@JoinColumn(name = "prod_id")
 	private Producto producto;
 	
 	public Compra() {
 		super();
 	}
 
-	public Compra(Long codigo, Producto producto, int cantidad, double total) {
+	public Compra(Long id, int codigo, Producto producto, int cantidad, double total) {
 		super();
 		this.codigo = codigo;
 		this.producto = producto;
@@ -46,11 +55,19 @@ public class Compra {
 		this.total = total;
 	}
 
-	public Long getCodigo() {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
@@ -81,8 +98,8 @@ public class Compra {
 
 	@Override
 	public String toString() {
-		return "Compra [codigo=" + codigo + ", producto=" + producto + ", cantidad=" + cantidad + ", total=" + total
-				+ "]";
+		return "Compra [id=" + id + ", codigo=" + codigo + ", cantidad=" + cantidad + ", total=" + total + ", producto="
+				+ producto + "]";
 	}
 	
 }
